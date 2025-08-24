@@ -8,19 +8,15 @@ import tensorflow as tf
 
 app = FastAPI()
 
-# MODEL = tf.keras.models.load_model("../saved_models/1")
+
 MODEL = tf.keras.models.load_model("../saved_models/1.keras")
 CLASS_NAMES = ["Early Blight", "Late Blight", "Healthy"]
+THRESHOLD = 0.6   # <-- adjust this based on your testing
+
 
 @app.get("/ping")
 async def ping():
     return {"message": "Hello, I am alive"}
-
-
-# def read_file_as_image(data) -> np.ndarry:
-#     image = np.array(Image.open(BytesIO(data)))
-#     return image
-
 
 # Helper function to read and preprocess image
 def read_file_as_image(data) -> np.ndarray:
@@ -34,9 +30,6 @@ async def predict(
     file: UploadFile = File(...)
 
 ):
-    # image = read_file_as_image(await file.read())
-    # img_batch = np.expand_dims(image, 0)
-    # predictions = MODEL.predict(img_batch)
     # Read and preprocess image
     image = read_file_as_image(await file.read())
     img_batch = np.expand_dims(image, axis=0)  # Add batch dimension
@@ -46,16 +39,16 @@ async def predict(
     predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
     confidence = float(np.max(predictions[0]))
 
+    # Apply threshold
+    if confidence < THRESHOLD:
+        result_class = "Unclassified"
+    else:
+        result_class = predicted_class
+
     return {
-        "class": predicted_class,
+        "class": result_class,
         "confidence": confidence
     }
-
-
-
-
-
-
 
 
 
