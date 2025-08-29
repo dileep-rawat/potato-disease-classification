@@ -92,7 +92,7 @@ http://localhost:8501
 
 * Production:
 
-  - Deploy FastAPI on a cloud service (AWS / GCP / Heroku / Railway).
+  - Deploy FastAPI on a cloud service (AWS / GCP / Heroku).
 
   - Point Streamlit app to that API URL.
 
