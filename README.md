@@ -86,7 +86,7 @@ streamlit run app.py
 http://localhost:8501
 
 
-5. Deployment Options
+## 5. Deployment Options
 
 * Local: FastAPI on 127.0.0.1:8000 + Streamlit on localhost:8501
 
