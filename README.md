@@ -1,4 +1,5 @@
 # Potato Disease Classification
+Farmers who grow potatoes are facing significant economic losses every year due to various diseases that can affect a potato plant. There are two common diseases known as Early Blight and Late Blight. If farmers can detect these diseases early and apply appropriate treatment, they can save a lot of waste and prevent economic losses.
 
 ## 1. Setup for Python
 ### 1.1 Install Python
